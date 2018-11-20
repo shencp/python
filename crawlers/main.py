@@ -1,19 +1,15 @@
 # ------------------------------------------------------------------------------------------------------
-import urllib.request
-
-f = urllib.request.urlopen('http://www.baidu.com/')
-
-f.read(500)
-
-f.read(500).decode('utf-8')
-
-print(f.read(500).decode('utf-8'))
-
-# ------------------------------------------------------------------------------------------------------
+# @ get data
 import requests
 
-r = requests.get('https://www.baidu.com/')
-print(r)
-print(r.text)
-r.encoding = 'utf-8'
-print(r.text)
+r = requests.get('https://book.douban.com/subject/1084336/comments/')
+
+# ------------------------------------------------------------------------------------------------------
+# @ decode data
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(r.text, 'lxml')
+pattern = soup.find_all('span', 'short')
+for item in pattern:
+    print('----')
+    print(item.string)
