@@ -9,10 +9,7 @@ from scrapy.selector import Selector
 # ------------------------------------------------------------------------------------------------------
 # @ set work dir
 import os
-
 os.chdir('C:\\Users\\15858\Desktop')
-
-
 # ------------------------------------------------------------------------------------------------------
 def getSevenAndThree(url, f, day):
     s = requests.get(url, timeout=20)
@@ -24,7 +21,6 @@ def getSevenAndThree(url, f, day):
         if da == '复式7+3':
             break
         i = i + 1
-
     print('------------------------------------------------------------------------------------------')
     f.write('\n')
     f.write(day)
