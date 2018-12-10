@@ -9,7 +9,7 @@ from scrapy.selector import Selector
 # ------------------------------------------------------------------------------------------------------
 # @ set work dir
 import os
-os.chdir('C:\\Users\\15858\Desktop')
+os.chdir('C:\\Users\Administrator\Desktop')
 # ------------------------------------------------------------------------------------------------------
 def getSevenAndThree(url, f, day):
     s = requests.get(url, timeout=20)
@@ -17,15 +17,22 @@ def getSevenAndThree(url, f, day):
     selector = Selector(text=s.text)
     data = selector.xpath('//*[@id="wzxs2_leftb"]/tbody[2]/*/*').xpath('string()').extract()
     i = 0
+    da = ''
     for da in data:
         if da == '复式7+3':
             break
         i = i + 1
+
+    if da != '复式7+3':
+        return
     print('------------------------------------------------------------------------------------------')
     f.write('\n')
     f.write(day)
     f.write(':')
-    f.write(page.xpath('//div[@class="main-hd-article"]/h1[@class="main-hd-title"]/text()')[0])
+    timestamp = page.xpath('//div[@class="main-hd-article"]/div[@class="main-hd-title-bar"]/span/text()')[0]
+    print(time.mktime(time.strptime(timestamp,'%Y年%m月%d日%H:%M')))
+    #f.write(page.xpath('//div[@class="main-hd-article"]/h1[@class="main-hd-title-bar"]/span/text()'))
+
     f.write('\n------------------------------------------------------------------------------------------\n')
     f.write(data[i])
     f.write(' 【')
